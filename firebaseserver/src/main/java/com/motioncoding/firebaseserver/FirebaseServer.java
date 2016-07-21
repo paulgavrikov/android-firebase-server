@@ -14,13 +14,9 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-/**
- * Created by paulgavrikov on 15/06/16.
- */
 public class FirebaseServer {
 
     private String mAuthKey;
-    private final String FCM_BASE = "https://gcm-http.googleapis.com/gcm/send";
 
     public FirebaseServer(String authKey) {
         mAuthKey = authKey;
@@ -71,8 +67,6 @@ public class FirebaseServer {
      */
     private void send(final String data) {
 
-        Log.e("json", data);
-
         new AsyncTask<Void, Void, Void>() {
 
 
@@ -93,6 +87,7 @@ public class FirebaseServer {
                     Response response = client.newCall(request).execute();
                     response.close();
                 } catch (IOException e) {
+                    e.printStackTrace();
                     Log.e("FCM-ERROR", e.toString());
                 }
                 return null;
